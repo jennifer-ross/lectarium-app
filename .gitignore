@@ -1,0 +1,122 @@
+# Miscellaneous
+.class
+.lock
+.log
+.pyc
+.swp
+.DS_Store
+.atom
+.buildlog
+.history
+.svn
+
+# IntelliJ related
+.iml
+.ipr
+.iws
+.idea
+
+# Visual Studio Code related
+.classpath
+.project
+.settings
+.vscode
+
+# Flutter repo-specific
+bincache
+bininternalbootstrap.bat
+bininternalbootstrap.sh
+binmingit
+devbenchmarksmega_gallery
+devbots.recipe_deps
+devbotsandroid_tools
+devdevicelabABresults.json
+devdocsdoc
+devdocsflutter.docs.zip
+devdocslib
+devdocspubspec.yaml
+devintegration_testsxcuserdata
+devintegration_testsPods
+packagesfluttercoverage
+version
+analysis_benchmark.json
+
+# packages file containing multi-root paths
+.packages.generated
+
+# FlutterDartPub related
+docapi
+.dart_tool
+.flutter-plugins
+.flutter-plugins-dependencies
+generated_plugin_registrant.dart
+.packages
+.pub-cache
+.pub
+build
+flutter_.png
+linked_.ds
+unlinked.ds
+unlinked_spec.ds
+
+# Android related
+androidgradle-wrapper.jar
+.gradle
+androidcaptures
+androidgradlew
+androidgradlew.bat
+androidlocal.properties
+androidGeneratedPluginRegistrant.java
+androidkey.properties
+.jks
+
+# iOSXCode related
+ios.mode1v3
+ios.mode2v3
+ios.moved-aside
+ios.pbxuser
+ios.perspectivev3
+iossync
+ios.sconsign.dblite
+ios.tags
+ios.vagrant
+iosDerivedData
+iosIcon
+iosPods
+ios.symlinks
+iosprofile
+iosxcuserdata
+ios.generated
+iosFlutter.last_build_id
+iosFlutterApp.framework
+iosFlutterFlutter.framework
+iosFlutterFlutter.podspec
+iosFlutterGenerated.xcconfig
+iosFlutterephemeral
+iosFlutterapp.flx
+iosFlutterapp.zip
+iosFlutterflutter_assets
+iosFlutterflutter_export_environment.sh
+iosServiceDefinitions.json
+iosRunnerGeneratedPluginRegistrant.
+
+# macOS
+Flutterephemeral
+Pods
+macosFlutterGeneratedPluginRegistrant.swift
+macosFlutterephemeral
+xcuserdata
+
+# Coverage
+coverage
+
+# Symbols
+app..symbols
+
+# Exceptions to above rules.
+!iosdefault.mode1v3
+!iosdefault.mode2v3
+!iosdefault.pbxuser
+!iosdefault.perspectivev3
+!packagesflutter_toolstestdatadart_dependencies_test.packages
+!devciGemfile.lock
