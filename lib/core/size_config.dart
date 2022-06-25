@@ -16,7 +16,7 @@ class SizeConfig {
   static bool isKeyBoadrdVisible = false;
 
   void init(BoxConstraints constraints, Orientation orientation) {
-    isMobile = MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+    isMobile = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
             .size
             .shortestSide <
         600;
