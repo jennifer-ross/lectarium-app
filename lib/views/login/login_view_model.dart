@@ -60,7 +60,7 @@ class LoginViewModel extends BaseViewModel {
 
   onLoginClick({Function? callback}) {
     locator<NavigatorService>()
-        .navigateToWithReplacementRemoveUntil('/dashboard')
+        .navigateToWithReplacement('/dashboard')
         .then((value) {
       if (controller != null) {
         controller.reverse().then((value) => show = false);

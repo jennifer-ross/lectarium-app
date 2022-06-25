@@ -20,7 +20,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   onLoginClick({Function? callback}) {
-    locator<NavigatorService>().navigateTo('/login').then((value) {
+    locator<NavigatorService>().navigateTo('/login')?.then((value) {
       if (controller != null) {
         controller.reverse().then((value) => show = false);
       }
@@ -28,7 +28,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   onSignUpClick({Function? callback}) {
-    locator<NavigatorService>().navigateTo('/signup').then((value) {
+    locator<NavigatorService>().navigateTo('/signup')?.then((value) {
       if (controller != null) {
         controller.reverse().then((value) => show = false);
       }

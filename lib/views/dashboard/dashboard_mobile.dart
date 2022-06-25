@@ -27,7 +27,9 @@ class _DashboardMobile extends StatelessWidget {
             Container(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: Image.network(course.kartinka_kursa[0]),
+                child: course.imageUrl != null && course.imageUrl!.isNotEmpty
+                    ? Image.network(course.imageUrl.toString())
+                    : null,
               ),
             ),
             Container(
@@ -36,7 +38,9 @@ class _DashboardMobile extends StatelessWidget {
                 top: 12.0,
               ),
               child: Text(
-                course.product_cat[0]['name'],
+                course.productCat!.isNotEmpty
+                    ? course.productCat?.first.name ?? ''
+                    : '',
                 style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0), fontSize: 24),
               ),
@@ -52,7 +56,7 @@ class _DashboardMobile extends StatelessWidget {
                       color: Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.circular(10.0)),
                   child: Text(
-                    course.kategoriya_kursa,
+                    course.category ?? '',
                     style: TextStyle(
                         color: Color.fromARGB(255, 128, 128, 128),
                         fontSize: 16),
@@ -67,7 +71,7 @@ class _DashboardMobile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    course.month[0]['name'],
+                    course.month?.first.name ?? '',
                     style: TextStyle(
                         color: Color.fromARGB(255, 77, 92, 109), fontSize: 18),
                   ),
@@ -83,7 +87,7 @@ class _DashboardMobile extends StatelessWidget {
               alignment: Alignment.centerLeft,
               margin: const EdgeInsets.only(top: 12.0),
               child: Text(
-                course.author?.display_name ?? '',
+                course.author?.data?.displayName ?? '',
                 style: TextStyle(
                     color: Color.fromARGB(255, 135, 135, 135), fontSize: 14),
               ),
@@ -94,8 +98,7 @@ class _DashboardMobile extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(30)),
                 child: LinearProgressIndicator(
                   minHeight: 8,
-                  value:
-                      (course.course_progress['percentage'] as int).toDouble(),
+                  value: (course.progress?.percentage as int).toDouble(),
                   backgroundColor: Color.fromARGB(255, 240, 240, 240),
                   color: Color.fromARGB(255, 255, 199, 0),
                 ),
@@ -128,9 +131,8 @@ class _DashboardMobile extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                          course.current_last_openned_index! > 0
-                              ? course.current_last_openned_index.toString() +
-                                  "Урок"
+                          course.lastOpenedIndex! > 0
+                              ? course.lastOpenedIndex.toString() + "Урок"
                               : 'Начать курс',
                           style: TextStyle(
                               fontSize: 16.0,
@@ -163,9 +165,7 @@ class _DashboardMobile extends StatelessWidget {
                           color: Color.fromARGB(255, 255, 255, 255),
                           borderRadius: BorderRadius.circular(10.0)),
                       child: Text(
-                        (course.course_progress['percentage'] as int)
-                                .toString() +
-                            ' %',
+                        (course.progress?.percentage as int).toString() + ' %',
                         style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0), fontSize: 16),
                       ),
@@ -220,7 +220,7 @@ class _DashboardMobile extends StatelessWidget {
                     color: Color.fromARGB(255, 0, 0, 0), fontSize: 32),
               ),
             ),
-            if (user.courses!.isNotEmpty) ..._courses(context)
+            if (!isEmpty(user.courses)) ..._courses(context)
           ])),
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:lectarium/core/lectarium_api.dart';
 import 'package:lectarium/core/locator.dart';
 import 'package:lectarium/core/models/user.dart';
 import 'package:lectarium/core/size_config.dart';
+import 'package:lectarium/core/utils.dart';
 import 'package:lectarium/widgets/button_widget.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'package:responsive_builder/responsive_builder.dart';

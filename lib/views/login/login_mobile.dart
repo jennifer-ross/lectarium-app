@@ -1,7 +1,7 @@
 part of login_view;
 
 class _LoginMobile extends StatelessWidget {
-  _LoginMobile(this.viewModel);
+  const _LoginMobile(this.viewModel);
 
   final LoginViewModel viewModel;
 
@@ -106,22 +106,6 @@ class _LoginMobile extends StatelessWidget {
               if (isLogin != null && isLogin == true) {
                 viewModel.isLogin = true;
                 viewModel.onLoginClick();
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  backgroundColor: Colors.black,
-                  content: Text(
-                    isLogin.toString(),
-                    style: TextStyle(color: Colors.redAccent),
-                  ),
-                  duration: const Duration(seconds: 8),
-                  action: SnackBarAction(
-                    textColor: Theme.of(context).primaryColor,
-                    label: 'OK',
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    },
-                  ),
-                ));
               }
             },
             hasBorder: false,
