@@ -1,20 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:lectarium/core/size_config.dart';
 import 'package:lectarium/views/dashboard/dashboard_view.dart';
 import 'package:lectarium/views/login/login_view.dart';
-import 'package:lectarium/views/signup/signup_view.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'dart:async';
+import 'package:provider/provider.dart';
 
 import 'core/locator.dart';
 import 'core/models/user.dart';
 import 'core/providers.dart';
 import 'core/services/navigator_service.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'views/home/home_view.dart';
 
 void main() async {
   await LocatorInjector.setupLocator();
@@ -24,7 +23,7 @@ void main() async {
 class MainApplication extends StatelessWidget {
   final User user = locator<User>();
 
-  MainApplication() {
+  MainApplication({Key? key}) : super(key: key) {
     loading();
   }
 
@@ -55,40 +54,29 @@ class MainApplication extends StatelessWidget {
                 return MultiProvider(
                   providers: ProviderInjector.providers,
                   child: MaterialApp(
+                    initialRoute: '/',
                     theme: ThemeData(
                         fontFamily: "Suisse Intl",
                         primaryColor: Colors.white,
                         accentColor: Colors.black,
-                        textTheme: TextTheme()),
+                        textTheme: const TextTheme()),
                     navigatorKey: locator<NavigatorService>().navigatorKey,
+                    scaffoldMessengerKey: locator
+                        .get<GlobalKey<ScaffoldMessengerState>>('scaffold'),
                     home: !user.isAuth ? LoginView() : DashboardView(),
-                    onGenerateRoute: (routeSettings) {
-                      switch (routeSettings.name) {
-                        case '/dashboard':
-                          return PageTransition(
-                              child: DashboardView(),
-                              type: PageTransitionType.fade);
-                        case '/login':
-                          return PageTransition(
-                              child: LoginView(),
-                              type: PageTransitionType.fade);
-                        case '/signup':
-                          return PageTransition(
-                              child: SignupView(),
-                              type: PageTransitionType.fade);
-
-                        default:
-                          return PageTransition(
-                              child:
-                                  !user.isAuth ? LoginView() : DashboardView(),
-                              type: PageTransitionType.fade);
-                      }
-                    },
+                    routes: generateRoutes(),
                   ),
                 );
               });
             });
           });
         });
+  }
+
+  Map<String, WidgetBuilder> generateRoutes() {
+    return <String, WidgetBuilder>{
+      '/login': (BuildContext context) => LoginView(),
+      '/dashboard': (BuildContext context) => DashboardView(),
+    };
   }
 }
