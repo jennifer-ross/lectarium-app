@@ -48,7 +48,7 @@ class User {
   loadFromStorage() async {
     await _user_data.ready;
 
-    await _user_data.ready!.then((value) {
+    await _user_data.ready.then((value) {
       Map<String, dynamic> user_info =
           jsonDecode(_user_data.getItem('user_info')) as Map<String, dynamic>;
       if (user_info != null && !user_info.isEmpty) {

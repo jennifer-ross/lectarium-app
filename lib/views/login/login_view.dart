@@ -10,9 +10,9 @@ import 'package:lectarium/core/services/navigator_service.dart';
 import 'package:lectarium/core/size_config.dart';
 import 'package:lectarium/widgets/button_widget.dart';
 import 'package:lectarium/widgets/textfield_widget.dart';
-import 'package:provider_architecture/provider_architecture.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'login_view_model.dart';
 
 part 'login_mobile.dart';
@@ -24,7 +24,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     LoginViewModel viewModel = locator<LoginViewModel>();
 
-    return ViewModelProvider<LoginViewModel>.withConsumer(
+    return ViewModelBuilder<LoginViewModel>.reactive(
         viewModelBuilder: () => viewModel,
         disposeViewModel: false,
         onModelReady: (viewModel) {

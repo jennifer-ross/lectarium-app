@@ -9,7 +9,7 @@ bool isEmpty(dynamic value) {
 
 void showGlobalError(String value) {
   GlobalKey<ScaffoldMessengerState> scaffold =
-      locator.get<GlobalKey<ScaffoldMessengerState>>('scaffold');
+      locator.get<GlobalKey<ScaffoldMessengerState>>(instanceName: 'scaffold');
 
   scaffold.currentState?.activate();
   scaffold.currentState?.showSnackBar(SnackBar(
@@ -28,7 +28,7 @@ void showGlobalError(String value) {
 
 void hideGlobalError() {
   GlobalKey<ScaffoldMessengerState> scaffold =
-      locator.get<GlobalKey<ScaffoldMessengerState>>('scaffold');
+      locator.get<GlobalKey<ScaffoldMessengerState>>(instanceName: 'scaffold');
 
   scaffold.currentState?.hideCurrentSnackBar();
   scaffold.currentState?.deactivate();

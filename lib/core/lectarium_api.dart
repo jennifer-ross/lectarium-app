@@ -66,7 +66,7 @@ class LectariumApi extends BaseService {
             ));
       }
 
-      int respCode = resp.statusCode.toInt();
+      int respCode = resp.statusCode?.toInt() ?? 0;
 
       if (respCode >= 400) {
         String respError = resp.data['data']['message'] as String;
@@ -80,14 +80,15 @@ class LectariumApi extends BaseService {
       return resp;
     } on DioError catch (de) {
       if (de.response != null) {
-        dynamic msgCode = de.response.data['data']['message_code'];
+        dynamic msgCode = de.response?.data['data']['message_code'];
 
         if (msgCode == _jwt_rejected) {
           await _logoutUser();
           return;
         }
 
-        return de.response.data['data']['message'];
+        return de.response?.data['data']['message'] ??
+            'Не удалось получить ответ от сервера';
       }
 
       return de.message;

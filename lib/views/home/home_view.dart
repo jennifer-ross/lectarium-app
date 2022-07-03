@@ -3,9 +3,9 @@ library home_view;
 import 'package:lectarium/core/locator.dart';
 import 'package:lectarium/core/size_config.dart';
 import 'package:lectarium/widgets/button_widget.dart';
-import 'package:provider_architecture/provider_architecture.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'home_view_model.dart';
 
 part 'home_mobile.dart';
@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     HomeViewModel viewModel = locator<HomeViewModel>();
 
-    return ViewModelProvider<HomeViewModel>.withConsumer(
+    return ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => viewModel,
         disposeViewModel: false,
         onModelReady: (viewModel) {
