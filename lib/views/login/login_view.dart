@@ -16,8 +16,6 @@ import 'package:stacked/stacked.dart';
 import 'login_view_model.dart';
 
 part 'login_mobile.dart';
-part 'login_tablet.dart';
-part 'login_desktop.dart';
 
 class LoginView extends StatelessWidget {
   @override

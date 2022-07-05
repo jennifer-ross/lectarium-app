@@ -15,8 +15,6 @@ import 'package:stacked/stacked.dart';
 import 'dashboard_view_model.dart';
 
 part 'dashboard_mobile.dart';
-part 'dashboard_tablet.dart';
-part 'dashboard_desktop.dart';
 
 class DashboardView extends StatelessWidget {
   @override
