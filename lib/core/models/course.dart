@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -6,85 +6,88 @@ import 'package:flutter/foundation.dart';
 import 'package:lectarium/core/models/course_progress.dart';
 import 'package:lectarium/core/models/post.dart';
 import 'package:lectarium/core/models/term.dart';
+import 'package:lectarium/core/models/user.dart';
+import 'package:lectarium/core/models/user_data.dart';
 
 class Course extends Post {
-  bool? isFavorite = false;
-  String? imageUrl = '';
-  CourseProgress? progress;
-  List<Term>? productCat = <Term>[];
-  List<Term>? month = <Term>[];
-  String? category = '';
-  int? lastOpenedIndex = 0;
+  bool isFavorite = false;
+  String imageUrl = '';
+  CourseProgress progress = CourseProgress();
+  List<Term> productCat = <Term>[];
+  List<Term> month = <Term>[];
+  String category = '';
+  int lastOpenedIndex = 0;
 
-  Course._();
+  Course._() : super(author: User(data: UserData()));
 
   Course.withPost(
     Post post, {
-    this.productCat,
-    this.category,
-    this.imageUrl,
+    this.productCat = const <Term>[],
+    this.category = '',
+    this.imageUrl = '',
     this.lastOpenedIndex = 0,
-    this.month,
-    this.progress,
-    this.isFavorite,
+    this.month = const <Term>[],
+    required this.progress,
+    this.isFavorite = false,
   }) : super.withObject(post);
 
   Course({
-    this.productCat,
-    this.category,
-    this.imageUrl,
+    this.productCat = const <Term>[],
+    this.category = '',
+    this.imageUrl = '',
     this.lastOpenedIndex = 0,
-    this.month,
-    this.progress,
-    this.isFavorite,
-    int? id,
-    int? postAuthor,
-    String? postDate,
-    String? postDateGtm,
-    String? postContent,
-    String? postExcerpt,
-    String? postStatus,
-    String? commentStatus,
-    String? postPassword,
-    String? postName,
-    String? toPing,
-    String? pinned,
-    String? postModified,
-    String? postModifiedGtm,
-    String? postContentFiltered,
-    int? postParent,
-    String? guid,
-    int? menuOrder,
-    String? postType,
-    String? postMimeType,
-    int? commentCount,
-    String? filter,
-    String? postTitle,
+    this.month = const <Term>[],
+    required this.progress,
+    this.isFavorite = false,
+    int id = 0,
+    int postAuthor = 0,
+    String postDate = '0000-00-00 00:00:00',
+    String postDateGtm = '0000-00-00 00:00:00',
+    String postContent = '',
+    String postExcerpt = '',
+    String postStatus = 'publish',
+    String commentStatus = 'open',
+    String postPassword = '',
+    String postName = '',
+    String toPing = '',
+    String pinned = '',
+    String postModified = '0000-00-00 00:00:00',
+    String postModifiedGtm = '0000-00-00 00:00:00',
+    String postContentFiltered = '',
+    int postParent = 0,
+    String guid = '',
+    int menuOrder = 0,
+    String postType = 'post',
+    String postMimeType = '',
+    int commentCount = 0,
+    String filter = 'raw',
+    String postTitle = '',
+    User? author,
   }) : super(
-          id: id,
-          postAuthor: postAuthor,
-          postDate: postDate,
-          postDateGtm: postDateGtm,
-          postContent: postContent,
-          postExcerpt: postExcerpt,
-          postStatus: postStatus,
-          commentStatus: commentStatus,
-          postPassword: postPassword,
-          postName: postName,
-          toPing: toPing,
-          pinned: pinned,
-          postModified: postModified,
-          postModifiedGtm: postModifiedGtm,
-          postContentFiltered: postContentFiltered,
-          postParent: postParent,
-          guid: guid,
-          menuOrder: menuOrder,
-          postType: postType,
-          postMimeType: postMimeType,
-          commentCount: commentCount,
-          filter: filter,
-          postTitle: postTitle,
-        );
+            id: id,
+            postAuthor: postAuthor,
+            postDate: postDate,
+            postDateGtm: postDateGtm,
+            postContent: postContent,
+            postExcerpt: postExcerpt,
+            postStatus: postStatus,
+            commentStatus: commentStatus,
+            postPassword: postPassword,
+            postName: postName,
+            toPing: toPing,
+            pinned: pinned,
+            postModified: postModified,
+            postModifiedGtm: postModifiedGtm,
+            postContentFiltered: postContentFiltered,
+            postParent: postParent,
+            guid: guid,
+            menuOrder: menuOrder,
+            postType: postType,
+            postMimeType: postMimeType,
+            commentCount: commentCount,
+            filter: filter,
+            postTitle: postTitle,
+            author: author ?? User(data: UserData()));
 
   @override
   Map<String, dynamic> toMap() {
@@ -93,10 +96,9 @@ class Course extends Post {
       'course_image_url': imageUrl,
       'category': category,
       'last_opened_index': lastOpenedIndex,
-      'course_progress':
-          progress != null ? progress?.toMap() : CourseProgress(),
-      'product_cat': productCat?.asMap(),
-      'month': month?.asMap(),
+      'course_progress': progress.toMap(),
+      'product_cat': productCat.asMap(),
+      'month': month.asMap(),
     };
 
     map.addAll(super.toMap());
@@ -135,8 +137,8 @@ class Course extends Post {
           ? CourseProgress.fromMap(
               map['course_progress'] as Map<String, dynamic>)
           : CourseProgress(),
-      productCat: map['product_cat'] != null ? buildedCats : <Term>[],
-      month: map['month'] != null ? buildedMonths : <Term>[],
+      productCat: map['product_cat'] != null ? buildedCats : const <Term>[],
+      month: map['month'] != null ? buildedMonths : const <Term>[],
     );
   }
 
@@ -147,56 +149,42 @@ class Course extends Post {
       Course.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Course &&
-        other.id == id &&
-        other.postAuthor == postAuthor &&
-        other.postDate == postDate &&
-        other.postDateGtm == postDateGtm &&
-        other.postContent == postContent &&
-        other.postTitle == postTitle &&
-        other.postExcerpt == postExcerpt &&
-        other.postStatus == postStatus &&
-        other.commentStatus == commentStatus &&
-        other.postPassword == postPassword &&
-        other.postName == postName &&
-        other.toPing == toPing &&
-        other.pinned == pinned &&
-        other.postModified == postModified &&
-        other.postModifiedGtm == postModifiedGtm &&
-        other.postContentFiltered == postContentFiltered &&
-        other.postParent == postParent &&
-        other.guid == guid &&
-        other.menuOrder == menuOrder &&
-        other.postType == postType &&
-        other.postMimeType == postMimeType &&
-        other.commentCount == commentCount &&
-        other.imageUrl == imageUrl &&
-        other.category == category &&
-        other.lastOpenedIndex == lastOpenedIndex &&
-        other.progress == progress &&
-        listEquals(other.month, month) &&
-        listEquals(other.productCat, productCat) &&
-        other.isFavorite == isFavorite;
-  }
+  bool get stringify => true;
 
   @override
-  int get hashCode {
-    return super.hashCode ^
-        imageUrl.hashCode ^
-        category.hashCode ^
-        lastOpenedIndex.hashCode ^
-        progress.hashCode ^
-        month.hashCode ^
-        productCat.hashCode ^
-        isFavorite.hashCode;
-  }
-
-  @override
-  String toString() {
-    return 'Course(isFavorite: $isFavorite, imageUrl: $imageUrl, productCat: $productCat, month: $month, category: $category, lastOpenedIndex: $lastOpenedIndex) extends ' +
-        super.toString();
+  List<Object> get props {
+    return [
+      id,
+      postAuthor,
+      author,
+      postDate,
+      postDateGtm,
+      postContent,
+      postTitle,
+      postExcerpt,
+      postStatus,
+      commentStatus,
+      postPassword,
+      postName,
+      toPing,
+      pinned,
+      postModified,
+      postModifiedGtm,
+      postContentFiltered,
+      postParent,
+      guid,
+      menuOrder,
+      postType,
+      postMimeType,
+      commentCount,
+      filter,
+      isFavorite,
+      imageUrl,
+      category,
+      lastOpenedIndex,
+      progress,
+      productCat,
+      month,
+    ];
   }
 }

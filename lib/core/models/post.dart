@@ -1,34 +1,36 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'dart:convert';
+
+import 'package:lectarium/core/base/base_model.dart';
+import 'package:lectarium/core/models/user_data.dart';
 
 import 'user.dart';
 
-class Post {
-  int? id = 0;
-  int? postAuthor = 0;
-  User? author;
-  // TODO: Add author
-  String? postDate = '0000-00-00 00:00:00';
-  String? postDateGtm = '0000-00-00 00:00:00';
-  String? postContent = '';
-  String? postTitle = '';
-  String? postExcerpt = '';
-  String? postStatus = 'publish';
-  String? commentStatus = 'open';
-  String? postPassword = '';
-  String? postName = '';
-  String? toPing = '';
-  String? pinned = '';
-  String? postModified = '0000-00-00 00:00:00';
-  String? postModifiedGtm = '0000-00-00 00:00:00';
-  String? postContentFiltered = '';
-  int? postParent = 0;
-  String? guid = '';
-  int? menuOrder = 0;
-  String? postType = 'post';
-  String? postMimeType = '';
-  int? commentCount = 0;
-  String? filter = 'raw';
+class Post extends BaseModel {
+  int id = 0;
+  int postAuthor = 0;
+  User author = User(data: UserData());
+  String postDate = '0000-00-00 00:00:00';
+  String postDateGtm = '0000-00-00 00:00:00';
+  String postContent = '';
+  String postTitle = '';
+  String postExcerpt = '';
+  String postStatus = 'publish';
+  String commentStatus = 'open';
+  String postPassword = '';
+  String postName = '';
+  String toPing = '';
+  String pinned = '';
+  String postModified = '0000-00-00 00:00:00';
+  String postModifiedGtm = '0000-00-00 00:00:00';
+  String postContentFiltered = '';
+  int postParent = 0;
+  String guid = '';
+  int menuOrder = 0;
+  String postType = 'post';
+  String postMimeType = '';
+  int commentCount = 0;
+  String filter = 'raw';
 
   Post._();
 
@@ -59,85 +61,86 @@ class Post {
   }
 
   Post(
-      {this.id,
-      this.postAuthor,
-      this.postDate,
-      this.postDateGtm,
-      this.postContent,
-      this.postExcerpt,
-      this.postStatus,
-      this.commentStatus,
-      this.postPassword,
-      this.postName,
-      this.toPing,
-      this.pinned,
-      this.postModified,
-      this.postModifiedGtm,
-      this.postContentFiltered,
-      this.postParent,
-      this.guid,
-      this.menuOrder,
-      this.postType,
-      this.postMimeType,
-      this.commentCount,
-      this.filter,
-      this.postTitle,
-      this.author});
+      {this.id = 0,
+      this.postAuthor = 0,
+      this.postDate = '0000-00-00 00:00:00',
+      this.postDateGtm = '0000-00-00 00:00:00',
+      this.postContent = '',
+      this.postExcerpt = '',
+      this.postStatus = 'publish',
+      this.commentStatus = 'open',
+      this.postPassword = '',
+      this.postName = '',
+      this.toPing = '',
+      this.pinned = '',
+      this.postModified = '0000-00-00 00:00:00',
+      this.postModifiedGtm = '0000-00-00 00:00:00',
+      this.postContentFiltered = '',
+      this.postParent = 0,
+      this.guid = '',
+      this.menuOrder = 0,
+      this.postType = 'post',
+      this.postMimeType = '',
+      this.commentCount = 0,
+      this.filter = 'raw',
+      this.postTitle = '',
+      required this.author});
 
   Post copyWith({
-    int? id,
-    int? postAuthor,
-    String? postDate,
-    String? postDateGtm,
-    String? postContent,
-    String? postExcerpt,
-    String? postStatus,
-    String? commentStatus,
-    String? postPassword,
-    String? postName,
-    String? toPing,
-    String? pinned,
-    String? postModified,
-    String? postModifiedGtm,
-    String? postContentFiltered,
-    int? postParent,
-    String? guid,
-    int? menuOrder,
-    String? postType,
-    String? postMimeType,
-    int? commentCount,
-    String? filter,
-    String? postTitle,
+    int id = 0,
+    int postAuthor = 0,
+    String postDate = '0000-00-00 00:00:00',
+    String postDateGtm = '0000-00-00 00:00:00',
+    String postContent = '',
+    String postExcerpt = '',
+    String postStatus = 'publish',
+    String commentStatus = 'open',
+    String postPassword = '',
+    String postName = '',
+    String toPing = '',
+    String pinned = '',
+    String postModified = '0000-00-00 00:00:00',
+    String postModifiedGtm = '0000-00-00 00:00:00',
+    String postContentFiltered = '',
+    int postParent = 0,
+    String guid = '',
+    int menuOrder = 0,
+    String postType = 'post',
+    String postMimeType = '',
+    int commentCount = 0,
+    String filter = 'raw',
+    String postTitle = '',
     User? author,
   }) {
     return Post(
-      id: id ?? this.id,
-      postAuthor: postAuthor ?? this.postAuthor,
-      postDate: postDate ?? this.postDate,
-      postDateGtm: postDateGtm ?? this.postDateGtm,
-      postContent: postContent ?? this.postContent,
-      postTitle: postTitle ?? this.postTitle,
-      postExcerpt: postExcerpt ?? this.postExcerpt,
-      postStatus: postStatus ?? this.postStatus,
-      commentStatus: commentStatus ?? this.commentStatus,
-      postPassword: postPassword ?? this.postPassword,
-      postName: postName ?? this.postName,
-      toPing: toPing ?? this.toPing,
-      pinned: pinned ?? this.pinned,
-      postModified: postModified ?? this.postModified,
-      postModifiedGtm: postModifiedGtm ?? this.postModifiedGtm,
-      postContentFiltered: postContentFiltered ?? this.postContentFiltered,
-      postParent: postParent ?? this.postParent,
-      guid: guid ?? this.guid,
-      menuOrder: menuOrder ?? this.menuOrder,
-      postType: postType ?? this.postType,
-      postMimeType: postMimeType ?? this.postMimeType,
-      commentCount: commentCount ?? this.commentCount,
-      filter: filter ?? this.filter,
-      author: author ?? this.author,
+      id: id,
+      postAuthor: postAuthor,
+      postDate: postDate,
+      postDateGtm: postDateGtm,
+      postContent: postContent,
+      postTitle: postTitle,
+      postExcerpt: postExcerpt,
+      postStatus: postStatus,
+      commentStatus: commentStatus,
+      postPassword: postPassword,
+      postName: postName,
+      toPing: toPing,
+      pinned: pinned,
+      postModified: postModified,
+      postModifiedGtm: postModifiedGtm,
+      postContentFiltered: postContentFiltered,
+      postParent: postParent,
+      guid: guid,
+      menuOrder: menuOrder,
+      postType: postType,
+      postMimeType: postMimeType,
+      commentCount: commentCount,
+      filter: filter,
+      author: author ?? User(data: UserData()),
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
@@ -163,13 +166,13 @@ class Post {
       'post_mime_type': postMimeType,
       'comment_count': commentCount,
       'filter': filter,
-      'author': author == null ? author?.toMap() : User(),
+      'author': author.toMap(),
     };
   }
 
   factory Post.fromMap(Map<String, dynamic> map) {
     return Post(
-      id: map['id'] as int,
+      id: map['ID'] as int,
       postAuthor: map['post_author'] as int,
       postDate: map['post_date'] as String,
       postDateGtm: map['post_date_gtm'] as String,
@@ -192,9 +195,9 @@ class Post {
       postMimeType: map['post_mime_type'] as String,
       commentCount: map['comment_count'] as int,
       filter: map['filter'] as String,
-      author: map['author'] == null
+      author: map['author'] != null
           ? User.fromMap(map['author'] as Map<String, dynamic>)
-          : User(),
+          : User(data: UserData()),
     );
   }
 
@@ -204,66 +207,35 @@ class Post {
       Post.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'Post(id: $id, postAuthor: $postAuthor, postDate: $postDate, postDateGtm: $postDateGtm, postContent: $postContent, postTitle: $postTitle, postExcerpt: $postExcerpt, postStatus: $postStatus, commentStatus: $commentStatus, postPassword: $postPassword, postName: $postName, toPing: $toPing, pinned: $pinned, postModified: $postModified, postModifiedGtm: $postModifiedGtm, postContentFiltered: $postContentFiltered, postParent: $postParent, guid: $guid, menuOrder: $menuOrder, postType: $postType, postMimeType: $postMimeType, commentCount: $commentCount, filter: $filter, author: $author)';
-  }
+  bool get stringify => true;
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Post &&
-        other.id == id &&
-        other.postAuthor == postAuthor &&
-        other.postDate == postDate &&
-        other.postDateGtm == postDateGtm &&
-        other.postContent == postContent &&
-        other.postTitle == postTitle &&
-        other.postExcerpt == postExcerpt &&
-        other.postStatus == postStatus &&
-        other.commentStatus == commentStatus &&
-        other.postPassword == postPassword &&
-        other.postName == postName &&
-        other.toPing == toPing &&
-        other.pinned == pinned &&
-        other.postModified == postModified &&
-        other.postModifiedGtm == postModifiedGtm &&
-        other.postContentFiltered == postContentFiltered &&
-        other.postParent == postParent &&
-        other.guid == guid &&
-        other.menuOrder == menuOrder &&
-        other.postType == postType &&
-        other.postMimeType == postMimeType &&
-        other.commentCount == commentCount &&
-        other.author == author &&
-        other.filter == filter;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        postAuthor.hashCode ^
-        postDate.hashCode ^
-        postDateGtm.hashCode ^
-        postContent.hashCode ^
-        postTitle.hashCode ^
-        postExcerpt.hashCode ^
-        postStatus.hashCode ^
-        commentStatus.hashCode ^
-        postPassword.hashCode ^
-        postName.hashCode ^
-        toPing.hashCode ^
-        pinned.hashCode ^
-        postModified.hashCode ^
-        postModifiedGtm.hashCode ^
-        postContentFiltered.hashCode ^
-        postParent.hashCode ^
-        guid.hashCode ^
-        menuOrder.hashCode ^
-        postType.hashCode ^
-        postMimeType.hashCode ^
-        commentCount.hashCode ^
-        author.hashCode ^
-        filter.hashCode;
+  List<Object> get props {
+    return [
+      id,
+      postAuthor,
+      author,
+      postDate,
+      postDateGtm,
+      postContent,
+      postTitle,
+      postExcerpt,
+      postStatus,
+      commentStatus,
+      postPassword,
+      postName,
+      toPing,
+      pinned,
+      postModified,
+      postModifiedGtm,
+      postContentFiltered,
+      postParent,
+      guid,
+      menuOrder,
+      postType,
+      postMimeType,
+      commentCount,
+      filter,
+    ];
   }
 }

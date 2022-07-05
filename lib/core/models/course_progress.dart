@@ -1,10 +1,20 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'dart:convert';
 
-class CourseProgress {
-  int? percentage = 0;
-  int? completed = 0;
-  int? total = 0;
+import 'package:lectarium/core/base/base_model.dart';
+
+class CourseProgress extends BaseModel {
+  double percentage = 0;
+  int completed = 0;
+  int total = 0;
+
+  CourseProgress._();
+
+  CourseProgress.withObject(CourseProgress progress) {
+    percentage = progress.percentage;
+    completed = progress.completed;
+    total = progress.total;
+  }
 
   CourseProgress({
     this.percentage = 0,
@@ -13,17 +23,18 @@ class CourseProgress {
   });
 
   CourseProgress copyWith({
-    int? percentage,
-    int? completed,
-    int? total,
+    double percentage = 0,
+    int completed = 0,
+    int total = 0,
   }) {
     return CourseProgress(
-      percentage: percentage ?? this.percentage,
-      completed: completed ?? this.completed,
-      total: total ?? this.total,
+      percentage: percentage,
+      completed: completed,
+      total: total,
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'percentage': percentage,
@@ -34,9 +45,11 @@ class CourseProgress {
 
   factory CourseProgress.fromMap(Map<String, dynamic> map) {
     return CourseProgress(
-      percentage: map['percentage'] as int,
-      completed: map['completed'] as int,
-      total: map['total'] as int,
+      percentage: map['percentage'] != null
+          ? (map['percentage'] as num).toDouble()
+          : 0.0,
+      completed: map['completed'] != null ? map['completed'] as int : 0,
+      total: map['total'] != null ? map['total'] as int : 0,
     );
   }
 
@@ -46,19 +59,8 @@ class CourseProgress {
       CourseProgress.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'CourseProgress(percentage: $percentage, completed: $completed, total: $total)';
+  bool get stringify => true;
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is CourseProgress &&
-        other.percentage == percentage &&
-        other.completed == completed &&
-        other.total == total;
-  }
-
-  @override
-  int get hashCode => percentage.hashCode ^ completed.hashCode ^ total.hashCode;
+  List<Object> get props => [percentage, completed, total];
 }

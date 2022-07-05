@@ -1,17 +1,19 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'dart:convert';
 
-class Term {
-  int? termId = 0;
-  String? name = '';
-  String? slug = '';
-  int? termGroup = 0;
-  int? termTaxonomyId = 0;
-  String? taxanomy = '';
-  String? description = '';
-  int? parent = 0;
-  int? count = 0;
-  String? filter = 'raw';
+import 'package:lectarium/core/base/base_model.dart';
+
+class Term extends BaseModel {
+  int termId = 0;
+  String name = '';
+  String slug = '';
+  int termGroup = 0;
+  int termTaxonomyId = 0;
+  String taxanomy = '';
+  String description = '';
+  int parent = 0;
+  int count = 0;
+  String filter = 'raw';
 
   Term._();
 
@@ -29,44 +31,45 @@ class Term {
   }
 
   Term({
-    this.termId,
-    this.name,
-    this.slug,
-    this.termGroup,
-    this.termTaxonomyId,
-    this.taxanomy,
-    this.description,
-    this.parent,
-    this.count,
-    this.filter,
+    this.termId = 0,
+    this.name = '',
+    this.slug = '',
+    this.termGroup = 0,
+    this.termTaxonomyId = 0,
+    this.taxanomy = '',
+    this.description = '',
+    this.parent = 0,
+    this.count = 0,
+    this.filter = '',
   });
 
   Term copyWith({
-    int? termId,
-    String? name,
-    String? slug,
-    int? termGroup,
-    int? termTaxonomyId,
-    String? taxanomy,
-    String? description,
-    int? parent,
-    int? count,
-    String? filter,
+    int termId = 0,
+    String name = '',
+    String slug = '',
+    int termGroup = 0,
+    int termTaxonomyId = 0,
+    String taxanomy = '',
+    String description = '',
+    int parent = 0,
+    int count = 0,
+    String filter = '',
   }) {
     return Term(
-      termId: termId ?? this.termId,
-      name: name ?? this.name,
-      slug: slug ?? this.slug,
-      termGroup: termGroup ?? this.termGroup,
-      termTaxonomyId: termTaxonomyId ?? this.termTaxonomyId,
-      taxanomy: taxanomy ?? this.taxanomy,
-      description: description ?? this.description,
-      parent: parent ?? this.parent,
-      count: count ?? this.count,
-      filter: filter ?? this.filter,
+      termId: termId,
+      name: name,
+      slug: slug,
+      termGroup: termGroup,
+      termTaxonomyId: termTaxonomyId,
+      taxanomy: taxanomy,
+      description: description,
+      parent: parent,
+      count: count,
+      filter: filter,
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'term_id': termId,
@@ -103,38 +106,21 @@ class Term {
       Term.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'Term(termId: $termId, name: $name, slug: $slug, termGroup: $termGroup, termTaxonomyId: $termTaxonomyId, taxanomy: $taxanomy, description: $description, parent: $parent, count: $count, filter: $filter)';
-  }
+  bool get stringify => true;
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Term &&
-        other.termId == termId &&
-        other.name == name &&
-        other.slug == slug &&
-        other.termGroup == termGroup &&
-        other.termTaxonomyId == termTaxonomyId &&
-        other.taxanomy == taxanomy &&
-        other.description == description &&
-        other.parent == parent &&
-        other.count == count &&
-        other.filter == filter;
-  }
-
-  @override
-  int get hashCode {
-    return termId.hashCode ^
-        name.hashCode ^
-        slug.hashCode ^
-        termGroup.hashCode ^
-        termTaxonomyId.hashCode ^
-        taxanomy.hashCode ^
-        description.hashCode ^
-        parent.hashCode ^
-        count.hashCode ^
-        filter.hashCode;
+  List<Object> get props {
+    return [
+      termId,
+      name,
+      slug,
+      termGroup,
+      termTaxonomyId,
+      taxanomy,
+      description,
+      parent,
+      count,
+      filter,
+    ];
   }
 }
