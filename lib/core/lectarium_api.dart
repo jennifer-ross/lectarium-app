@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:lectarium/core/base/base_service.dart';
 import 'package:lectarium/core/models/course.dart';
+import 'package:lectarium/core/models/pagination_model.dart';
 import 'package:lectarium/core/models/user.dart';
 import 'package:lectarium/core/services/navigator_service.dart';
 import 'package:lectarium/core/utils.dart';
@@ -158,7 +156,28 @@ class LectariumApi extends BaseService {
     return result as Response<dynamic>;
   }
 
-  Future<dynamic> fetchCourses() async {
+  Future<Map<String, Course>> fetchCourses(PaginationModel paginate) async {
+    Response response;
+
+    response = await _get(url: 'courses', useAuth: true);
+
+    if (!isEmpty(response)) {
+      dynamic data = response.data['data'];
+      Map<String, Course> courses = <String, Course>{};
+
+      log?.d(response.toString());
+
+      (data['courses'] as Map<String, dynamic>).forEach((key, value) {
+        courses[key] = Course.fromMap(value as Map<String, dynamic>);
+      });
+
+      return courses;
+    }
+
+    return <String, Course>{};
+  }
+
+  Future<dynamic> fetchCoursesToUser() async {
     Response response;
     User user = locator<User>();
 
@@ -169,7 +188,7 @@ class LectariumApi extends BaseService {
       user.courses = <String, Course>{};
 
       (data['courses'] as Map<String, dynamic>).forEach((key, value) {
-        user.courses?[key] = Course.fromMap(value);
+        user.courses[key] = Course.fromMap(value);
       });
 
       return true;
